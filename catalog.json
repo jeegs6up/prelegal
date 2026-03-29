@@ -1,0 +1,62 @@
+[
+  {
+    "name": "AI Addendum",
+    "description": "Standard AI Addendum covering the use of AI services as part of a product, including restrictions, input/output ownership, and AI-specific warranties.",
+    "filename": "AI-Addendum.md"
+  },
+  {
+    "name": "Business Associate Agreement",
+    "description": "Standard Business Associate Agreement (BAA) for HIPAA compliance, governing the use and disclosure of Protected Health Information (PHI).",
+    "filename": "BAA.md"
+  },
+  {
+    "name": "Cloud Service Agreement",
+    "description": "Standard Cloud Service Agreement (CSA) covering SaaS access, support, data protection, security, warranties, and liability for cloud services.",
+    "filename": "CSA.md"
+  },
+  {
+    "name": "Data Processing Agreement",
+    "description": "Standard Data Processing Agreement (DPA) governing the processing of personal data, processor/subprocessor relationships, and data protection compliance.",
+    "filename": "DPA.md"
+  },
+  {
+    "name": "Design Partner Agreement",
+    "description": "Standard Design Partner Agreement for early product access programs, covering feedback, product development, and partner obligations.",
+    "filename": "Design-Partner-Agreement.md"
+  },
+  {
+    "name": "Mutual NDA",
+    "description": "Standard Mutual Non-Disclosure Agreement (MNDA) standard terms for protecting confidential information shared between two parties.",
+    "filename": "Mutual-NDA.md"
+  },
+  {
+    "name": "Mutual NDA Cover Page",
+    "description": "Cover page template for the Mutual Non-Disclosure Agreement, containing party details and customizable fields.",
+    "filename": "Mutual-NDA-coverpage.md"
+  },
+  {
+    "name": "Partnership Agreement",
+    "description": "Standard Partnership Agreement covering mutual obligations, cooperation, feedback, intellectual property, and revenue sharing between partners.",
+    "filename": "Partnership-Agreement.md"
+  },
+  {
+    "name": "Pilot Agreement",
+    "description": "Standard Pilot Agreement for trial or evaluation access to a product, covering pilot period terms, restrictions, and transition to paid use.",
+    "filename": "Pilot-Agreement.md"
+  },
+  {
+    "name": "Professional Services Agreement",
+    "description": "Standard Professional Services Agreement (PSA) covering consulting and professional services engagements, statements of work, and deliverables.",
+    "filename": "PSA.md"
+  },
+  {
+    "name": "Service Level Agreement",
+    "description": "Standard Service Level Agreement (SLA) covering uptime targets, downtime calculations, service credits, and support response times.",
+    "filename": "SLA.md"
+  },
+  {
+    "name": "Software License Agreement",
+    "description": "Standard Software License Agreement covering on-premises or installed software licensing, user accounts, updates, and usage restrictions.",
+    "filename": "Software-License-Agreement.md"
+  }
+]
