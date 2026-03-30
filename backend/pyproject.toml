@@ -4,9 +4,11 @@ version = "0.1.0"
 description = "Prelegal backend API"
 requires-python = ">=3.13"
 dependencies = [
+    "bcrypt>=5.0.0",
     "fastapi>=0.135.2",
     "litellm>=1.82.6",
     "pydantic>=2.12.5",
+    "pyjwt>=2.12.1",
     "python-dotenv>=1.2.2",
     "uvicorn[standard]>=0.42.0",
 ]

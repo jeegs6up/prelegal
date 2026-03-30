@@ -82,9 +82,28 @@ Backend available at http://localhost:8000
 - AI chat adapts system prompt and field extraction per document type
 - Equal-width layout: form+preview left, chat right
 
+### Completed (PL-7)
+- Real user authentication with JWT in HttpOnly cookies (bcrypt password hashing)
+- Signup and signin with email/password on polished login page with tabs
+- Document persistence — save documents to user account, load and delete past documents
+- My Documents modal accessible from header
+- User menu with email display and sign out
+- New Document button to start fresh
+- Save Document button alongside Download PDF
+- Disclaimer banner on all document previews
+- Professional SaaS polish across all screens
+
 ### Current API Endpoints
 - `GET /api/health` - Health check
+- `POST /api/auth/signup` - Create new user account (sets HttpOnly JWT cookie)
+- `POST /api/auth/signin` - Sign in (sets HttpOnly JWT cookie)
+- `POST /api/auth/signout` - Clear auth cookie
+- `GET /api/auth/me` - Get current user info from cookie
 - `GET /api/documents/types` - List all document types for dropdown
 - `GET /api/documents/template/{slug}` - Get template content and field schema
+- `GET /api/user/documents` - List user's saved documents (auth required)
+- `POST /api/user/documents` - Save new document (auth required)
+- `GET /api/user/documents/{id}` - Get saved document with fields (auth required)
+- `DELETE /api/user/documents/{id}` - Delete saved document (auth required)
 - `GET /api/chat/greeting?doc_type=` - Get AI greeting for document type
 - `POST /api/chat/message` - Send chat message with documentType, get AI response + extracted fields
