@@ -36,3 +36,27 @@ export const defaultFormData: NdaFormData = {
   party1: { name: "", title: "", company: "", noticeAddress: "" },
   party2: { name: "", title: "", company: "", noticeAddress: "" },
 };
+
+export interface DocumentType {
+  slug: string;
+  name: string;
+  description: string;
+}
+
+export interface FieldDefinition {
+  name: string;
+  label: string;
+  type: "text" | "textarea" | "date" | "radio";
+  default: string;
+  options?: string[];
+}
+
+export interface DocumentTemplate {
+  content: string;
+  standardTerms: string;
+  fields: FieldDefinition[];
+  name: string;
+  parties: string[];
+}
+
+export type DocumentFields = Record<string, string>;

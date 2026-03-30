@@ -4,6 +4,7 @@
 
 This is a SaaS product to allow users to draft legal agreements based on templates in the templates directory.
 The user can carry out AI chat in order to establish what document they want and how to fill in the fields.
+All 11 document types from the catalog are supported via AI chat.
 The available documents are covered in the catalog.json file in the project root, included here:
 
 @catalog.json
@@ -71,7 +72,19 @@ Backend available at http://localhost:8000
 - AI greets user, asks questions conversationally, and confirms when complete
 - Layout: left = form + preview, right = chat panel
 
+### Completed (PL-6)
+- Support for all 11 document types from catalog.json
+- Document type dropdown selector in header
+- Document registry (backend/documents.py) with field definitions per document type
+- Generic form component renders fields dynamically per document type
+- Generic preview component renders markdown templates with field substitution
+- NDA keeps its polished custom form and preview components
+- AI chat adapts system prompt and field extraction per document type
+- Equal-width layout: form+preview left, chat right
+
 ### Current API Endpoints
 - `GET /api/health` - Health check
-- `GET /api/chat/greeting` - Get AI greeting message
-- `POST /api/chat/message` - Send chat message, get AI response + extracted fields
+- `GET /api/documents/types` - List all document types for dropdown
+- `GET /api/documents/template/{slug}` - Get template content and field schema
+- `GET /api/chat/greeting?doc_type=` - Get AI greeting for document type
+- `POST /api/chat/message` - Send chat message with documentType, get AI response + extracted fields
