@@ -1,10 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import NdaForm from "./components/NdaForm";
 import NdaPreview from "./components/NdaPreview";
-import { NdaFormData, defaultFormData } from "./types";
+import ChatPanel from "./components/ChatPanel";
+import { NdaFormData, PartyInfo, defaultFormData } from "./types";
+
+function mergeParty(existing: PartyInfo, incoming: Record<string, unknown>): PartyInfo {
+  return {
+    name: incoming.name != null ? (incoming.name as string) : existing.name,
+    title: incoming.title != null ? (incoming.title as string) : existing.title,
+    company: incoming.company != null ? (incoming.company as string) : existing.company,
+    noticeAddress: incoming.noticeAddress != null ? (incoming.noticeAddress as string) : existing.noticeAddress,
+  };
+}
 
 export default function Home() {
   const [formData, setFormData] = useState<NdaFormData>(defaultFormData);
@@ -20,6 +30,22 @@ export default function Home() {
       setReady(true);
     }
   }, [router]);
+
+  const handleFieldsExtracted = useCallback((fields: Record<string, unknown>) => {
+    setFormData((prev) => {
+      const updated = { ...prev };
+      for (const [key, value] of Object.entries(fields)) {
+        if (key === "party1" && typeof value === "object" && value) {
+          updated.party1 = mergeParty(prev.party1, value as Record<string, unknown>);
+        } else if (key === "party2" && typeof value === "object" && value) {
+          updated.party2 = mergeParty(prev.party2, value as Record<string, unknown>);
+        } else if (key in prev && value !== null && value !== undefined) {
+          (updated as Record<string, unknown>)[key] = value;
+        }
+      }
+      return updated;
+    });
+  }, []);
 
   async function handleDownload() {
     if (!previewRef.current) return;
@@ -61,8 +87,8 @@ export default function Home() {
             Prelegal &mdash; Mutual NDA Creator
           </h1>
           <p className="text-sm text-gray-text">
-            Fill in the details below. Preview your NDA on the right and
-            download as PDF.
+            Chat with our AI assistant to create your NDA, or edit fields
+            directly.
           </p>
         </div>
         <button
@@ -74,9 +100,9 @@ export default function Home() {
       </header>
 
       <div className="flex flex-1 flex-col gap-6 p-6 lg:flex-row">
-        {/* Left: Form */}
-        <div className="w-full shrink-0 lg:w-[420px]">
-          <div className="sticky top-6 rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+        {/* Left: Form + Preview stacked */}
+        <div className="w-full shrink-0 space-y-6 lg:w-[420px]">
+          <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
             <NdaForm formData={formData} onChange={setFormData} />
             <button
               onClick={handleDownload}
@@ -86,12 +112,19 @@ export default function Home() {
               {downloading ? "Generating PDF..." : "Download PDF"}
             </button>
           </div>
-        </div>
 
-        {/* Right: Preview */}
-        <div className="flex-1 overflow-auto">
           <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
             <NdaPreview ref={previewRef} formData={formData} />
+          </div>
+        </div>
+
+        {/* Right: Chat Panel */}
+        <div className="flex-1">
+          <div className="sticky top-6 h-[calc(100vh-120px)] rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+            <ChatPanel
+              formData={formData}
+              onFieldsExtracted={handleFieldsExtracted}
+            />
           </div>
         </div>
       </div>
