@@ -63,5 +63,15 @@ Backend available at http://localhost:8000
 - Mutual NDA form with live preview and PDF download
 - Project color scheme applied to frontend
 
+### Completed (PL-5)
+- AI chat interface alongside manual form for Mutual NDA creation
+- Uses LiteLLM via OpenRouter with Cerebras inference (gpt-oss-120b model)
+- Structured outputs for reliable field extraction from conversation
+- Live preview updates as AI extracts fields from chat
+- AI greets user, asks questions conversationally, and confirms when complete
+- Layout: left = form + preview, right = chat panel
+
 ### Current API Endpoints
 - `GET /api/health` - Health check
+- `GET /api/chat/greeting` - Get AI greeting message
+- `POST /api/chat/message` - Send chat message, get AI response + extracted fields
