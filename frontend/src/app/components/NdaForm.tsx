@@ -17,8 +17,8 @@ function PartyFields({
   onChange: (party: PartyInfo) => void;
 }) {
   return (
-    <fieldset className="rounded-lg border border-zinc-200 p-4">
-      <legend className="px-2 text-sm font-semibold text-zinc-700">
+    <fieldset className="rounded-lg border border-gray-200 p-4">
+      <legend className="px-2 text-sm font-semibold text-dark-navy">
         {label}
       </legend>
       <div className="grid gap-3">
@@ -27,21 +27,21 @@ function PartyFields({
           placeholder="Full Name"
           value={party.name}
           onChange={(e) => onChange({ ...party, name: e.target.value })}
-          className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none"
         />
         <input
           type="text"
           placeholder="Title"
           value={party.title}
           onChange={(e) => onChange({ ...party, title: e.target.value })}
-          className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none"
         />
         <input
           type="text"
           placeholder="Company"
           value={party.company}
           onChange={(e) => onChange({ ...party, company: e.target.value })}
-          className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none"
         />
         <input
           type="text"
@@ -50,7 +50,7 @@ function PartyFields({
           onChange={(e) =>
             onChange({ ...party, noticeAddress: e.target.value })
           }
-          className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none"
         />
       </div>
     </fieldset>
@@ -63,34 +63,34 @@ export default function NdaForm({ formData, onChange }: NdaFormProps) {
 
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="text-lg font-semibold text-zinc-800">
+      <h2 className="text-lg font-semibold text-dark-navy">
         Mutual NDA Details
       </h2>
 
       <label className="flex flex-col gap-1">
-        <span className="text-sm font-medium text-zinc-700">Purpose</span>
+        <span className="text-sm font-medium text-dark-navy">Purpose</span>
         <textarea
           rows={2}
           value={formData.purpose}
           onChange={(e) => update({ purpose: e.target.value })}
-          className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none"
         />
       </label>
 
       <label className="flex flex-col gap-1">
-        <span className="text-sm font-medium text-zinc-700">
+        <span className="text-sm font-medium text-dark-navy">
           Effective Date
         </span>
         <input
           type="date"
           value={formData.effectiveDate}
           onChange={(e) => update({ effectiveDate: e.target.value })}
-          className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none"
         />
       </label>
 
       <fieldset className="flex flex-col gap-2">
-        <legend className="text-sm font-medium text-zinc-700">MNDA Term</legend>
+        <legend className="text-sm font-medium text-dark-navy">MNDA Term</legend>
         <label className="flex items-center gap-2 text-sm">
           <input
             type="radio"
@@ -105,7 +105,7 @@ export default function NdaForm({ formData, onChange }: NdaFormProps) {
             value={formData.mndaTermYears}
             onChange={(e) => update({ mndaTermYears: e.target.value })}
             disabled={formData.mndaTermType !== "expires"}
-            className="w-16 rounded-md border border-zinc-300 px-2 py-1 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none disabled:opacity-50"
+            className="w-16 rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none disabled:opacity-50"
           />
           year(s) from Effective Date
         </label>
@@ -121,7 +121,7 @@ export default function NdaForm({ formData, onChange }: NdaFormProps) {
       </fieldset>
 
       <fieldset className="flex flex-col gap-2">
-        <legend className="text-sm font-medium text-zinc-700">
+        <legend className="text-sm font-medium text-dark-navy">
           Term of Confidentiality
         </legend>
         <label className="flex items-center gap-2 text-sm">
@@ -140,7 +140,7 @@ export default function NdaForm({ formData, onChange }: NdaFormProps) {
                 update({ confidentialityTermYears: e.target.value })
               }
               disabled={formData.confidentialityTermType !== "expires"}
-              className="w-16 rounded-md border border-zinc-300 px-2 py-1 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none disabled:opacity-50"
+              className="w-16 rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none disabled:opacity-50"
             />{" "}
             year(s) from Effective Date (trade secrets protected until no longer
             considered trade secrets)
@@ -159,7 +159,7 @@ export default function NdaForm({ formData, onChange }: NdaFormProps) {
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-zinc-700">
+          <span className="text-sm font-medium text-dark-navy">
             Governing Law (State)
           </span>
           <input
@@ -167,11 +167,11 @@ export default function NdaForm({ formData, onChange }: NdaFormProps) {
             placeholder="e.g. Delaware"
             value={formData.governingLaw}
             onChange={(e) => update({ governingLaw: e.target.value })}
-            className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+            className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-zinc-700">
+          <span className="text-sm font-medium text-dark-navy">
             Jurisdiction
           </span>
           <input
@@ -179,13 +179,13 @@ export default function NdaForm({ formData, onChange }: NdaFormProps) {
             placeholder="e.g. courts located in New Castle, DE"
             value={formData.jurisdiction}
             onChange={(e) => update({ jurisdiction: e.target.value })}
-            className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+            className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none"
           />
         </label>
       </div>
 
       <label className="flex flex-col gap-1">
-        <span className="text-sm font-medium text-zinc-700">
+        <span className="text-sm font-medium text-dark-navy">
           Modifications (optional)
         </span>
         <textarea
@@ -193,7 +193,7 @@ export default function NdaForm({ formData, onChange }: NdaFormProps) {
           value={formData.modifications}
           onChange={(e) => update({ modifications: e.target.value })}
           placeholder="List any modifications to the standard terms"
-          className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-primary focus:ring-1 focus:ring-blue-primary focus:outline-none"
         />
       </label>
 
