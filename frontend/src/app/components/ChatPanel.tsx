@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { NdaFormData } from "../types";
 
 interface Message {
   role: "user" | "assistant";
@@ -9,26 +8,38 @@ interface Message {
 }
 
 interface ChatPanelProps {
-  formData: NdaFormData;
+  formData: Record<string, string>;
+  documentType: string;
   onFieldsExtracted: (fields: Record<string, unknown>) => void;
 }
 
 const API_BASE = "/api";
 
-export default function ChatPanel({ formData, onFieldsExtracted }: ChatPanelProps) {
+export default function ChatPanel({
+  formData,
+  documentType,
+  onFieldsExtracted,
+}: ChatPanelProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const lastDocType = useRef(documentType);
 
   useEffect(() => {
-    fetch(`${API_BASE}/chat/greeting`)
+    let current = true;
+    if (documentType !== lastDocType.current) {
+      lastDocType.current = documentType;
+      setMessages([]);
+    }
+    fetch(`${API_BASE}/chat/greeting?doc_type=${documentType}`)
       .then((r) => r.json())
       .then((data) => {
-        setMessages([{ role: "assistant", content: data.message }]);
+        if (current) setMessages([{ role: "assistant", content: data.message }]);
       });
-  }, []);
+    return () => { current = false; };
+  }, [documentType]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -59,17 +70,24 @@ export default function ChatPanel({ formData, onFieldsExtracted }: ChatPanelProp
             content: m.content,
           })),
           currentFields: formData,
+          documentType,
         }),
       });
       const data = await res.json();
-      setMessages([...updatedMessages, { role: "assistant", content: data.message }]);
+      setMessages([
+        ...updatedMessages,
+        { role: "assistant", content: data.message },
+      ]);
       if (data.fields && Object.keys(data.fields).length > 0) {
         onFieldsExtracted(data.fields);
       }
     } catch {
       setMessages([
         ...updatedMessages,
-        { role: "assistant", content: "Sorry, something went wrong. Please try again." },
+        {
+          role: "assistant",
+          content: "Sorry, something went wrong. Please try again.",
+        },
       ]);
     } finally {
       setLoading(false);
@@ -78,9 +96,11 @@ export default function ChatPanel({ formData, onFieldsExtracted }: ChatPanelProp
 
   return (
     <div className="flex h-full flex-col">
-      <h2 className="mb-3 text-lg font-semibold text-dark-navy">AI Assistant</h2>
+      <h2 className="mb-3 text-lg font-semibold text-dark-navy">
+        AI Assistant
+      </h2>
 
-      <div className="flex-1 overflow-y-auto space-y-3 mb-3">
+      <div className="mb-3 flex-1 space-y-3 overflow-y-auto">
         {messages.map((msg, i) => (
           <div
             key={i}
@@ -99,7 +119,7 @@ export default function ChatPanel({ formData, onFieldsExtracted }: ChatPanelProp
         ))}
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg px-4 py-2.5 text-sm text-gray-text">
+            <div className="rounded-lg bg-gray-100 px-4 py-2.5 text-sm text-gray-text">
               Thinking...
             </div>
           </div>
